@@ -1,13 +1,25 @@
-import refs from './refs';
+export const localKey = 'my-tasks';
 
-const localeStorageKey = 'list-task';
-let obj = {
-  taskName: '',
-  taskDescription: '',
-};
+export function getTasks() {
+  const data = JSON.parse(localStorage.getItem(localKey));
+  return data;
+}
 
-export function setStorage(ev) {
-  obj[ev.target.name] = ev.target.value.trim();
+export function initStorage() {
+  const data = getTasks() ?? [];
+  localStorage.setItem(localKey, JSON.stringify(data));
+}
 
-  localStorage.setItem(localeStorageKey, JSON.stringify(obj));
+export function saveTasktoStorage(task) {
+  const tasks = getTasks();
+  tasks.push(task);
+  localStorage.setItem(localKey, JSON.stringify(tasks));
+}
+
+export function deleteStorageTask(id) {
+  const array = getTasks();
+  const filterArray = array.filter(el => el.id !== id);
+  console.log(filterArray);
+
+  localStorage.setItem(localKey, JSON.stringify(filterArray));
 }
