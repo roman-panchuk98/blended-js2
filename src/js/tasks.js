@@ -1,10 +1,8 @@
-import refs from './refs';
-
-export function createTask(title, description) {
-  const markup = `<li class="task-list-item">
+export function createTask(params) {
+  const markup = `<li class="task-list-item" data-id="${params.id}">
   <button class="task-list-item-btn">Delete</button>
-  <h3>${title}</h3>
-  <p>${description}</p>
+  <h3>${params.titleTask}</h3>
+  <p>${params.descriptionTask}</p>
 </li>`;
-  refs.taskList.insertAdjacentHTML('beforeend', markup);
+  return markup;
 }
